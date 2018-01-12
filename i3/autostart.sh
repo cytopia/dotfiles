@@ -142,7 +142,7 @@ _execute "thunar --daemon" "thunar"
 _execute "feh --no-fehbg --bg-scale ${_MY_WALLPAPER}" "feh"
 
 ## Compositor
-_execute "compton --backend glx --vsync opengl -CG --xrender-sync --xrender-sync-fence --config /dev/null" "compton" "compton"
+_execute "compton" "compton" "compton"
 
 ## Notification daemon
 _execute "dunst" "dunst" "dunst"
