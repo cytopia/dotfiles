@@ -1,0 +1,21 @@
+pointer = 1 2 3 4 5 6 7 8 9 10 11 12
+
+
+! TODO:
+! switch: FN <-> Ctrl  (have it on the left)
+! switch: CMD <-> Ctrl (apple mode)
+! change: CAPS to Esc
+
+!clear control
+!clear mod4
+
+!keycode 105 =
+!keycode 206 =
+
+!keycode 133 = Control_L NoSymbol Control_L
+!keycode 134 = Control_R NoSymbol Control_R
+!keycode 37 = Super_L NoSymbol Super_L
+
+!add control = Control_L
+!add control = Control_R
+!add mod4 = Super_L

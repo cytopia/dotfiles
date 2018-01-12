@@ -1,0 +1,36 @@
+!
+! @file:    ~/.Xresources
+! @invoker: xrdb
+! @man:     -
+! @see:     https://wiki.archlinux.org/index.php/X_resources
+!
+! Xresources can be used to set X resources, which are configuration parameters
+! for X client applications.
+! They can do many operations, including:
+! * defining terminal colours
+! * configuring terminal preferences
+! * setting DPI, antialiasing, hinting and other X font settings
+! * changing the Xcursor theme
+! * theming xscreensaver
+! * altering preferences on low-level X applications
+!   xclock (xorg-xclock), xpdf, rxvt-unicode, etc.)
+!
+! ~/.Xdefaults is deprecated
+!
+! Make sure that xorg-xrdb is installed
+!
+! If you update this file, make sure to issue
+! the following command (as your normal user)
+! xrdb ~/.Xresources
+!
+! If you do not use a desktop environment
+! add the following to your ~/.xinitrc
+! [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+!
+
+#include ".config/Xresources.d/xft.xresources"
+#include ".config/Xresources.d/fonts.xresources"
+#include ".config/Xresources.d/colors.xresources"
+#include ".config/Xresources.d/rofi.xresources"
+#include ".config/Xresources.d/urxvt.xresources"
+

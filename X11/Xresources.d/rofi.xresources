@@ -1,0 +1,66 @@
+!-------------------------------------------------------------------------------
+! Rofi
+!-------------------------------------------------------------------------------
+
+!----------------------------------------
+! Rofi Behaviour
+!----------------------------------------
+!rofi.matching:				fuzzy
+rofi.terminal:				urxvt
+
+
+!----------------------------------------
+! Rofi Font
+!----------------------------------------
+rofi.font:					Monospace 14
+
+
+!----------------------------------------
+! Rofi Appearance
+!----------------------------------------
+rofi.hide-scrollbar:		true
+rofi.separator-style:		none
+rofi.fullscreen:			false
+rofi.lines:					15
+
+
+!----------------------------------------
+! Rofi Colors
+!----------------------------------------
+rofi.color-enabled:			true
+
+! bg    Background color row
+! fg    Text color
+! bgalt Background color alternating row
+! hlfg  Foreground color selected row
+! hlbg  Background color selected row
+
+!                  background border   separator
+rofi.color-window: #AA273238, #273238, #1e2529
+! State:           bg         fg       bgalt      hlbg     hlfg
+rofi.color-normal: #00273238, #c1c1c1, #00273238, #394249, #ffffff
+rofi.color-active: #00273238, #80cbc4, #00273238, #394249, #80cbc4
+rofi.color-urgent: #00273238, #ff1844, #00273238, #00394249, #ff1844
+
+
+!----------------------------------------
+! Rofi Keys
+!----------------------------------------
+
+! Delete word backwords
+rofi.kb-remove-word-back:	Control+w
+rofi.kb-clear-line:			Control+u
+
+! Move words with Ctrl+arrow
+rofi.kb-move-word-back:		Control+Left
+rofi.kb-move-word-forward:	Control+Right
+
+! Auto-completion
+rofi.kb-row-select:			Tab
+
+! The following need to be rebind randomly to not to interfer with my custom key bindings
+rofi.kb-row-tab:			Alt+Tab
+rofi.kb-remove-to-sol:		Control+Alt+u
+
+
+! vim: ff=unix ft=xdefaults ts=4 ss=4 noet

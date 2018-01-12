@@ -1,0 +1,248 @@
+!
+!! More color themes here:
+!! https://github.com/chriskempson/tomorrow-theme/tree/master/Xdefaults
+!
+!! Special
+!*.foreground:	#c5c8c6
+!*.background:	#1d1f21
+!*.cursorColor:	#c5c8c6
+!
+!! Black (dark/light)
+!*.color0:		#282a2e
+!*.color8:		#373b41
+!
+!! Red (dark/light)
+!*.color1:		#a54242
+!*.color9:		#cc6666
+!
+!! Green (dark/light)
+!*.color2:		#8c9440
+!*.color10:		#b5bd68
+!
+!! Yellow (dark/light)
+!*.color3:		#de935f
+!*.color11:		#f0c674
+!
+!! Blue (dark/light)
+!*.color4:		#5f819d
+!*.color12:		#81a2be
+!
+!! Magenta (dark/light)
+!*.color5:		#85678f
+!*.color13:		#b294bb
+!
+!! Cyan (dark/light)
+!*.color6:		#5e8d87
+!*.color14:		#8abeb7
+!
+!! White (dark/light)
+!*.color7:		#707880
+!*.color15:		#c5c8c6
+!
+!
+!
+!
+!xterm*faceName: Roboto Mono Medium for powerline:size=8:antialias=true
+!xterm*loginShell: true
+!xterm*vt100*geometry: 90x34
+!xterm*saveLines: 2000
+!xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
+!xterm*termName: xterm-color
+!xterm*eightBitInput: false
+!xterm*foreground: rgb:d9/d4/d4
+!xterm*background: #1B1B1B
+!xterm*color0: rgb:00/00/00
+!xterm*color1: rgb:a8/00/00
+!xterm*color2: rgb:00/a8/00
+!xterm*color3: rgb:a8/54/00
+!xterm*color4: rgb:5f/81/9d
+!xterm*color5: rgb:a8/00/a8
+!xterm*color6: rgb:00/a8/a8
+!xterm*color7: rgb:70/78/80
+!xterm*color8: rgb:54/54/54
+!xterm*color9: rgb:fc/54/54
+!xterm*color10: rgb:54/fc/54
+!xterm*color11: rgb:fc/fc/54
+!xterm*color12: rgb:81/a2/be
+!xterm*color13: rgb:fc/54/fc
+!xterm*color14: rgb:54/fc/fc
+!xterm*color15: rgb:c5/c8/c6
+!xterm*boldMode: false
+!
+!
+!! colors
+!URxvt*color0: #212121
+!URxvt*color1: #2b2b2b
+!URxvt*color2: #b1b1b1
+!URxvt*color3: #b1b1b1
+!URxvt*color4: #4c8dcc
+!URxvt*color5: #add8e6
+!URxvt*color6: #e0e0e0
+!URxvt*color7: #ffffff
+!URxvt*color8: #cc6666
+!URxvt*color9: #de935f
+!URxvt*color10: #f0c674
+!URxvt*color11: #b5bd68
+!URxvt*color12: #8abeb7
+!URxvt*color13: #81a2be
+!URxvt*color14: #b294bb
+!URxvt*color15: #a3685a
+!
+!! fix colors
+!UXTerm*background: rgb:63/63/63
+!UXTerm*foreground: rgb:00/00/00
+!UXTerm*color0: rgb:00/00/00
+!UXTerm*color1: rgb:a8/00/00
+!UXTerm*color2: rgb:00/a8/00
+!UXTerm*color3: rgb:a8/54/00
+!UXTerm*color4: rgb:00/00/a8
+!UXTerm*color5: rgb:a8/00/a8
+!UXTerm*color6: rgb:00/a8/a8
+!UXTerm*color7: rgb:a8/a8/a8
+!UXTerm*color8: rgb:54/54/54
+!UXTerm*color9: rgb:fc/54/54
+!UXTerm*color10: rgb:54/fc/54
+!UXTerm*color11: rgb:fc/fc/54
+!UXTerm*color12: rgb:54/54/fc
+!UXTerm*color13: rgb:fc/54/fc
+!UXTerm*color14: rgb:54/fc/fc
+!UXTerm*color15: rgb:fc/fc/fc
+!UXTerm*boldMode: false
+!UXTerm*colorBDMode: true
+!UXTerm*colorBD: rgb:3f/3f/3f
+!
+!!||| COLORSPECTRUM COLORSCHEME by: juleslord |||
+!!
+!! Examples for each different color
+!! 0: black (normal)
+!! 8: black (bright)
+!!
+!! Black (dark/light)
+!*color0:  #25283d
+!*color0:  #3F4256
+!*color8:  #709080
+!! Red (dark/light)
+!*color1:  #edcf8e
+!*color9:  #ee2e31
+!! Green (dark/light)
+!*color2:  #07bee8
+!*color10: #e83f6f
+!! Yellow (dark/light)
+!*color3:  #84dcc6
+!*color11: #f0dfaf
+!! Blue (dark/light)
+!*color4:  #0a8754
+!*color12: #94bff3
+!! Magenta (dark/light)
+!*color5:  #af3b6e
+!*color13: #ffbf00
+!! Cyan (dark/light)
+!*color6:  #cbf3f0
+!*color14: #1cfeba
+!! White (dark/light)
+!*color7:  #edddd4
+!*color15: #ffffff
+!
+!
+!*cursorColor:           S_base1
+!*pointerColorBackground:S_base01
+!*pointerColorForeground:S_base1
+
+
+
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+
+
+*foreground:  #c5c8c6
+*background:  #1d1f21
+*cursorColor: #c5c8c6
+*fadeColor:    #ff0000
+*pointerColorBackground:S_base01
+*pointerColorForeground:S_base1
+
+
+!-------------------------------------------------------------------------------
+! Color Defines
+!-------------------------------------------------------------------------------
+!# define S_black_dark   #3F4256
+!# define S_black_lite   #709080
+!# define S_red_dark     #edcf8e
+!# define S_red_lite     #ee2e31
+!# define S_green_dark   #07bee8
+!# define S_green_lite   #e83f6f
+!# define S_yellow_dark  #84dcc6
+!# define S_yellow_lite  #f0dfaf
+!# define S_blue_dark    #0a8754
+!# define S_blue_lite    #94bff3
+!# define S_magenta_dark #af3b6e
+!# define S_magento_lite #ffbf00
+!# define S_cyan_dark    #cbf3f0
+!# define S_cyan_lite    #1cfeba
+!# define S_white_dark   #edddd4
+!# define S_white_lite   #ffffff
+
+
+# define S_black_dark   #3F4256
+# define S_black_lite   #709080
+
+# define S_red_dark     #ee2e31
+# define S_red_lite     #e83f6f
+
+# define S_green_dark   #0a8754
+# define S_green_lite   #1cfeba
+
+# define S_yellow_dark  #ffbf00
+# define S_yellow_lite  #edcf8e
+
+## define S_blue_dark    #07bee8
+# define S_blue_dark    #00CCFB
+# define S_blue_lite    #cbf3f0
+
+# define S_magenta_dark #af3b6e
+# define S_magento_lite #edddd4
+
+# define S_cyan_dark    #94bff3
+# define S_cyan_lite    #84dcc6
+
+# define S_white_dark   #f0dfaf
+# define S_white_lite   #ffffff
+
+
+!-------------------------------------------------------------------------------
+! Color Assignments
+!-------------------------------------------------------------------------------
+
+! Black (dark/light)
+URxvt*color0:  S_black_dark
+URxvt*color8:  S_black_lite
+! Red (dark/light)
+URxvt*color1:  S_red_dark
+URxvt*color9:  S_red_lite
+! Green (dark/light)
+URxvt*color2:  S_green_dark
+URxvt*color10: S_green_lite
+! Yellow (dark/light)
+URxvt*color3:  S_yellow_dark
+URxvt*color11: S_yellow_lite
+! Blue (dark/light)
+URxvt*color4:  S_blue_dark
+URxvt*color12: S_blue_lite
+! Magenta (dark/light)
+URxvt*color5:  S_magenta_dark
+URxvt*color13: S_magenta_lite
+! Cyan (dark/light)
+URxvt*color6:  S_cyan_dark
+URxvt*color14: S_cyan_lite
+! White (dark/light)
+URxvt*color7:  S_white_dark
+URxvt*color15: S_white_lite
+
+! vim: ff=unix ft=xdefaults ts=4 ss=4 noet
