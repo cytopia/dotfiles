@@ -1,0 +1,37 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"All Autocomplete",
+		"Ansible",
+		"BracketHighlighter",
+		"DocBlockr",
+		"Dockerfile Syntax Highlighting",
+		"FileDiffs",
+		"Function Name Display",
+		"GitGutter",
+		"Hide Menu",
+		"i3 wm",
+		"INI",
+		"Jinja2",
+		"Package Control",
+		"SideBarEnhancements",
+		"SingleTrailingNewLine",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"SublimeLinter-json",
+		"SublimeLinter-pep8",
+		"SublimeLinter-php",
+		"SublimeLinter-pylint",
+		"SublimeLinter-shellcheck",
+		"SublimeLinter-xmllint",
+		"SyncedSideBar",
+		"Theme - Asphalt",
+		"TrailingSpaces",
+		"Xdebug Client",
+		"SublimeLinter-eslint"
+	]
+}
