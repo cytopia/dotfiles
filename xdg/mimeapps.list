@@ -1,0 +1,12 @@
+[Default Applications]
+image/bmp=ximage.desktop
+image/gif=ximage.desktop
+image/jpeg=ximage.desktop
+image/jpg=ximage.desktop
+image/png=ximage.desktop
+image/tiff=ximage.desktop
+image/x-bmp=ximage.desktop
+x-scheme-handler/http=chromium.desktop
+x-scheme-handler/https=chromium.desktop
+x-scheme-handler/about=chromium.desktop
+x-scheme-handler/unknown=chromium.desktop
