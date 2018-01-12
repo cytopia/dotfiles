@@ -1,0 +1,23 @@
+# Configure different git identities
+#
+# No space in *_ALIAS
+
+NUM_OF_GIT_IDENTS="3"
+
+GIT_IDENT1_ALIAS="john"
+GIT_IDENT1_NAME="John Doe"
+GIT_IDENT1_MAIL="john@doe.com"
+GIT_IDENT1_GPG="1234abcd"
+
+GIT_IDENT2_ALIAS="jane"
+GIT_IDENT2_NAME="Jane Doe"
+GIT_IDENT2_MAIL="jane@doe.com"
+GIT_IDENT2_GPG="abcdef12"
+
+GIT_IDENT3_ALIAS="peter"
+GIT_IDENT3_NAME="Peter Parker"
+GIT_IDENT3_MAIL="pete@spidy.com"
+GIT_IDENT3_GPG="11112222"
+
+
+# If you add more, make sure to increase 'NUM_OF_GIT_IDENTS'

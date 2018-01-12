@@ -1,0 +1,39 @@
+--exclude=.git
+--exclude=.svn
+--exclude=log
+--tag-relative=yes
+--totals=yes
+
+
+--langmap=PHP:+.inc
+--langmap=PHP:+.engine
+--langmap=PHP:+.module
+--langmap=PHP:+.php3
+--langmap=PHP:+.php4
+--langmap=PHP:+.php5
+--langmap=PHP:+.ctp
+--langmap=PHP:+.phtml
+--regex-PHP=/^[ \t ]*trait[ \t ]+([a-z0_9_]+)/\1/t,traits/i/
+--regex-PHP=/abstract\s+class\s+([^ ]+)/\1/a,abstract classes/
+--regex-PHP=/interface\s+([^ ]+)/\1/i,interfaces/
+--regex-PHP=/(public\s+|static\s+|abstract\s+|protected\s+|private\s+)function\s+\&?\s*([^ (]+)/\2/f/
+--PHP-kinds=+cidfvvjjjtcif
+
+
+--langdef=css
+--langmap=css:.css.less.scss.sass
+--regex-css=/^[ \t]*@([A-Za-z0-9_-]+)/@\1/v,var,variables/
+--regex-css=/^[ \t]*\.([A-Za-z0-9_-]+)/.\1/c,class,classes/
+--regex-css=/^[ \t]*#([A-Za-z0-9_-]+)/#\1/i,id,ids/
+--regex-css=/^[ \t]*(([A-Za-z0-9_-]+[ \t\n,]+)+)\{/\1/t,tag,tags/
+--regex-css=/^[ \t]*@media\s+([A-Za-z0-9_-]+)/\1/m,media,medias/
+
+
+--langdef=markdown
+--langmap=markdown:.md
+--regex-markdown=/^#[ \t]+(.*)/\1/h,Heading_L1/
+--regex-markdown=/^##[ \t]+(.*)/\1/i,Heading_L2/
+--regex-markdown=/^###[ \t]+(.*)/\1/k,Heading_L3/
+--regex-markdown=/^####[ \t]+(.*)/\1/k,Heading_L4/
+--regex-markdown=/^#####[ \t]+(.*)/\1/k,Heading_L5/
+--regex-markdown=/^######[ \t]+(.*)/\1/k,Heading_L6/

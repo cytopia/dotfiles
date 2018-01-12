@@ -1,0 +1,27 @@
+!-------------------------------------------------------------------------------
+! URxvt Settings
+!-------------------------------------------------------------------------------
+
+!----------------------------------------
+! Font
+!----------------------------------------
+
+! Unicode font with devicon support
+!*font:				xft:TerminessTTF Nerd Font:style=Medium:pixelsize=24:antialias=true:hinting=true
+!*boldFont:			xft:TerminessTTF Nerd Font:style=Medium:pixelsize=24:antialias=true:hinting=true
+
+*font:				xft:TerminessTTF Nerd Font Mono:style=Medium:size=12:antialias=true:hinting=true
+*boldFont:			xft:TerminessTTF Nerd Font Mono:style=Medium:size=12:antialias=true:hinting=true
+
+
+! Fix font space
+*lineSpace:			1
+
+! Urxvt can have problems with the spacings of some fonts (eg Terminus),
+! an option has been introduced in the latest version (9.07),
+! allowing you to manually tweak the spacings.
+!*letterSpace:			-2
+
+
+
+! vim: ff=unix ft=xdefaults ts=4 ss=4 noet

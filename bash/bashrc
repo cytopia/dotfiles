@@ -1,0 +1,98 @@
+#
+# @file:    ~/.bashrc
+# @invoker: Non-login shell
+# @see:     https://unix.stackexchange.com/questions/38175
+#
+# ~/.bashrc: executed by bash(1) for non-login shells.
+#
+
+
+###
+### If not running interactively, don't do anything
+###
+case $- in
+	*i*) ;;
+	*) return;;
+esac
+
+# Start tmux for every new terminal
+if [[ -z "${TMUX}" ]] ;then
+	# get the id of a deattached session
+	SESS_ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )"
+
+	# if not available create a new one
+	if [[ -z "${SESS_ID}" ]] ;then
+		tmux -2 -u new-session
+	# if detached session available attach to it
+	else
+		tmux -2 -u attach-session -t "${SESS_ID}"
+	fi
+fi
+
+
+################################################################################
+###
+### Session specific settings
+###
+################################################################################
+
+###
+### Global tab size
+###
+### Set tab width system wide to 4 spaces (instead 8)
+### @see man tabs
+###
+tabs -4 > /dev/null
+
+
+###
+### Append to the history file, don't overwrite it
+###
+shopt -s histappend
+
+
+###
+### Check the window size after each command and, if necessary,
+### update the values of LINES and COLUMNS.
+###
+shopt -s checkwinsize
+
+
+###
+### Enable programmable completion features (you don't need to enable
+### this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+### sources /etc/bash.bashrc).
+###
+if ! shopt -oq posix; then
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
+fi
+
+
+
+################################################################################
+###
+### Includes
+###
+################################################################################
+
+###
+### Source non-login shell config files
+###
+if [ -d "${XDG_CONFIG_HOME}/bash/bashrc.d/" ]; then
+	for f in ${XDG_CONFIG_HOME}/bash/bashrc.d/*.bash ; do
+		. "${f}"
+	done
+fi
+
+# 1Only search for text-files with 1FZF1
+#export 1FZF1_DEFAULT_COMMAND=' ag -0 --ignore-case --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --nocolor --hidden --nogroup -g "" 2>/dev/null | xargs -0 grep -Il "" 2>/dev/null'
+##export 1FZF1_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+##export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+#export 1FZF1_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

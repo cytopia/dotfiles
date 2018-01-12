@@ -1,0 +1,205 @@
+#
+# @file:    ~/.bash_profile
+# @invoker: Login shell
+# @see:     https://unix.stackexchange.com/questions/38175
+#
+# A login shell is the first process that executes under your user ID
+# when you log in for an interactive session.
+# The login process tells the shell to behave as a login shell with a
+# convention: passing argument 0, which is normally the name of the
+# shell executable, with a - character prepended
+# (e.g. -bash) whereas it would normally be bash. Login shells typically
+# read a file that does things like setting environment variables:
+# /etc/profile and ~/.profile for the traditional Bourne shell,
+# ~/.bash_profile additionally for bash†, /etc/zprofile and
+# ~/.zprofile for zsh†, /etc/csh.login and ~/.login for csh, etc.
+#
+
+
+
+# Disable less history
+#export LESSHISTFILE=/dev/null
+export LESSHISTFILE=-
+export LESSHISTSIZE=0
+
+#GPG_TTY=$(tty)
+#export GPG_TTY
+################################################################################
+###
+### Path's
+###
+################################################################################
+
+
+###
+### Default search Path
+###
+export PATH="${HOME}/bin:${HOME}/.local/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin"
+
+
+###
+### Default XDG path
+###
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CACHE_HOME="${HOME}/.cache"
+
+if [ -f ${XDG_CONFIG_HOME}/user-dirs.dirs ]; then
+	. ${XDG_CONFIG_HOME}/user-dirs.dirs
+	export XDG_DESKTOP_DIR
+	export XDG_DOWNLOAD_DIR
+	export XDG_TEMPLATES_DIR
+	export XDG_PUBLICSHARE_DIR
+	export XDG_DOCUMENTS_DIR
+	export XDG_MUSIC_DIR
+	export XDG_PICTURES_DIR
+	export XDG_VIDEOS_DIR
+fi
+
+
+
+################################################################################
+###
+### Locale
+###
+################################################################################
+
+
+###
+### General locale category to use.
+### (All LC_* values)
+###
+export LANG=en_US.UTF-8
+
+
+###
+### Overwrite specific LC_* values
+###
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_COLLATE="C"
+
+
+
+################################################################################
+###
+### Bash History
+###
+################################################################################
+
+
+###
+### What to save in the history file?
+###
+### * ignorespace	Ignore commands starting with space
+### * ignoredups	Ignore duplicate commands
+### * erasedups		If current command is already in history, remove old entries
+###					and keep the new entry.
+###					(Only stores latest version of command)
+export HISTCONTROL="ignorespace:ignoredups:erasedups"
+
+
+###
+### How many lines to save in the history file
+###
+export HISTFILESIZE=10000
+
+
+###
+### How many lines to remember in history list ($ history)
+###
+export HISTSIZE=10000
+
+
+###
+### Where to store the history file
+###
+export HISTFILE="${XDG_CACHE_HOME}/bash/bash_history"
+if [ ! -d "$( dirname "${HISTFILE}" )" ]; then
+	mkdir -p "$( dirname "${HISTFILE}" )"
+fi
+if [ ! -f "${HISTFILE}" ]; then
+	touch "${HISTFILE}"
+fi
+
+
+###
+### Format of timestring to prepend
+###
+export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S: "
+
+
+
+
+################################################################################
+###
+### Default Programs
+###
+################################################################################
+
+
+###
+### Login terminal type
+###
+export TERM=xterm-256color
+#export TERM=screen-256color
+
+
+###
+### Visual editor
+###
+### Crontab and less use 'VISUAL' to determine
+### the editor.
+### If 'VISUAL' is not set 'EDITOR' will be used
+### as a fall-back.
+###
+export VISUAL="nvim"
+
+
+###
+### Default Editor
+###
+export EDITOR="nvim"
+#export EDITOR="env TERM=xterm-256color vim -u"
+
+
+###
+### Default Viewer (manpage, etc)
+###
+export PAGER="less"
+#export PAGER=vimpager
+
+
+
+###
+### Non standard default programs
+###
+export BROWSER="/usr/bin/chromium"
+export TERMINAL="/usr/bin/urxvt"
+
+
+
+################################################################################
+###
+### Includes
+###
+################################################################################
+
+
+###
+### Source non-login shell config file
+###
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+
+###
+### Source login-shell config files
+###
+if [ -d "${XDG_CONFIG_HOME}/bash/bash_profile.d/" ]; then
+	for f in ${XDG_CONFIG_HOME}/bash/bash_profile.d/*.bash ; do
+		. "${f}"
+	done
+fi

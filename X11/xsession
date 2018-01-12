@@ -1,0 +1,19 @@
+#
+# @file:    ~/.xsession
+# @invoker: Graphical Login manager (xdm, gdm, kdm, wdm, lightdm, ...)
+# @man:    man Xsession
+# @see:    /etc/X11/Xsession
+#
+# This file is invoked by graphical login manager during login.
+# ~/.xsession has the role of ~/.profile and ~/.xinitrc combined:
+# it's supposed to perform the initial startup of your session
+# (e.g. define environment variables), then launch programs specific
+# to the GUI (usually at least window manager).
+#
+
+
+# TODO: explain these
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+
