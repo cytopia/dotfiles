@@ -45,7 +45,6 @@ interval=2
 [cputemp]
 command=~/.local/share/i3blocks-modules/modules/cputemp -tw '{temp}' '>' 75 -tc '{temp}' '>' 90
 instance=Core 0
-#instance=Physical id 0
 interval=2
 
 [memory]
@@ -55,32 +54,25 @@ interval=10
 [disk]
 command=~/.local/share/i3blocks-modules/modules/disk -f ' {used}/{total} {uunit}B' -tc '{pfree}' '<' 20 -tc '{pfree}' '<' 10
 instance=/
-interval=30
+interval=60
 
+# Requires internet
 [eth]
 command=~/.local/share/i3blocks-modules/modules/ethereum -f 'E {usd}$' -tc '{usd}' '<' 380
-interval=60
+interval=180
 
+# Requires internet
 [bch]
 command=~/.local/share/i3blocks-modules/modules/bitcoincash -f 'BC {usd}$' -tc '{usd}' '<' 665
-interval=60
+interval=180
 
+# Requires internet
 [btc]
-command=~/.local/share/i3blocks-modules/modules/bitcoin -f 'B {usd}$' -tc '{usd}' '<' 4470
+command=~/.local/share/i3blocks-modules/modules/bitcoin -f ' {usd}$' -tc '{usd}' '<' 4470
 instance=coindesk
-interval=60
+interval=180
 
-#[bitcoin_usd]
-#command=~/.local/share/i3blocks-modules/modules/bitcoin -f 'B {usd}$' -tc '{usd}' '<' 2500
-#instance=coindesk
-#interval=60
-
-
-#[ethereum]
-#command=~/.local/share/i3blocks-modules/modules/ethereum -f 'E {eur}€' -tc '{eur}' '<' 220
-#instance=btce
-#interval=60
-
+# Requires internet
 [online]
 command=~/.local/share/i3blocks-modules/modules/online
 interval=2
@@ -91,7 +83,7 @@ instance=wlp3s0
 interval=2
 
 [iface]
-command=~/.local/share/i3blocks-modules/modules/iface -f ' {status}' -fe '{status}' = 'absent' ''
+command=~/.local/share/i3blocks-modules/modules/iface -f ' {status}' -fe '{status}' '=' 'down|absent' ''
 instance=enp0s31f6
 interval=2
 
@@ -110,8 +102,7 @@ command=~/.local/share/i3blocks-modules/modules/volume -f "{icon} {volume}%" -id
 interval=1
 
 [date]
-#command=~/.local/share/i3blocks-modules/modules/date -f " {time}" -t "%a, %d.%m.%Y" -tg '{time}' '=' '^(Sat|Sun).*'
-command=~/.local/share/i3blocks-modules/modules/date -f " {time}" -t "(%V) %a, %d.%m.%Y"
+command=~/.local/share/i3blocks-modules/modules/date -f " {time}" -t "(%V) %a, %d.%m.%Y" -tg '{time}' '=' '.*(Sat|Sun).*'
 interval=60
 
 [time]
