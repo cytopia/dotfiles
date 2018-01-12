@@ -1,0 +1,275 @@
+# @version: 0.2
+# @date:    2018-01-12
+#
+
+
+################################################################################
+###
+### User
+###
+################################################################################
+
+[user]
+	name = cytopia
+	email = cytopia@everythingcli.org
+	signingkey = A02C56F0
+
+
+
+################################################################################
+###
+### Core
+###
+################################################################################
+
+[core]
+
+	# Check if converting CRLF is reversible
+	# and abort if not
+	safecrlf = true
+
+	# Default 'git diff' view
+	#pager = less -x1,5
+	pager = diff-highlight | less -x1,5 -R
+
+	# whitespace fix
+	#
+	# trailing-space: treats trailing whitespaces at the end of the line
+	# space-before-tab: treats a space character that appears immediately before a
+	# tab character in the initial indent part of the line as an error
+	whitespace = blank-at-eol,blank-at-eof,space-before-tab,trailing-space
+
+	# By default, Git uses whatever you’ve set as your default
+	# text editor ($VISUAL or $EDITOR) or else falls back to the vi
+	#editor = vim
+
+
+[apply]
+
+	# Warn about whitespace issues defined in core.whitespace
+	whitespace = warn
+
+
+
+################################################################################
+###
+### Status
+###
+################################################################################
+
+[status]
+
+    submodulesummary = true
+
+
+
+################################################################################
+###
+### Commit
+###
+################################################################################
+
+[commit]
+
+	verbose = true
+
+
+
+################################################################################
+###
+### Pull
+###
+################################################################################
+
+[pull]
+
+	# When pulling do not create a merge commit.
+	ff = only
+
+
+
+################################################################################
+###
+### Merge
+###
+################################################################################
+
+[merge]
+
+	summary = true
+
+	# No fast forward merge
+	# I want to see the merge tree instead
+	# of a flat merge
+	ff		= false
+
+	# What merge tool to use? (see below for merge to config)
+	#tool	= vimdiff
+	tool	= fugitive
+
+
+[mergetool]
+	keepBackup = false
+	prompt = false
+
+[mergetool "vimdiff"]
+	# https://www.toofishes.net/media/extra/vim_three_way.png
+	# http://www.rosipov.com/blog/use-vimdiff-as-git-mergetool/
+	#cmd = "vim -f -d -c 'wincmd J' -c 'resize 22' $MERGED $LOCAL $BASE $REMOTE"
+	#cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[mergetool "fugitive"]
+	cmd = nvim "+Gdiff" $MERGED
+
+
+################################################################################
+###
+### Diff Tool
+###
+################################################################################
+
+[diff]
+
+	# Set default 'difftool'
+	tool = vimdiff
+
+
+[diff "ansible-vault"]
+
+	# Be able to git diff Ansible vaule
+	textconv = ansible-vault view
+	# Do not cache the vault contents
+	cachetextconv = false
+
+
+[difftool]
+
+	# Do not prompt before launching a diff tool
+	prompt = false
+
+	# Be able to abort all diffs with `:cq` or `:cquit`
+	trustExitCode = true
+
+
+[difftool "vimdiff"]
+	# Nice vimdiff
+	cmd = nvim -d $LOCAL $REMOTE
+	#cmd = nvim -d $LOCAL $REMOTE '+syntax off'
+	#cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax off'
+
+
+
+################################################################################
+###
+### Aliases
+###
+################################################################################
+
+[alias]
+
+	################################################################################
+	# Action Commands
+
+	# Uncommit previous 'git commit'
+	#
+	# Files are still there and you will have
+	# to stage them again.
+	#
+	# This is useful, if you are back to work the
+	# next day and want to uncommit yesterday's commit
+	# in order to see what you have done
+	uncommit = reset HEAD~1 --mixed
+
+
+	# This commits everything in my working directory
+	# and then does a hard reset to remove that commit
+	#
+	# The nice thing is, the commit is still there, but it's just unreachable.
+	# Unreachable commits are a bit inconvenient to restore,
+	# but at least they are still there.
+	# You can run the git reflog command and find the SHA
+	# of the commit if you realize later that you made
+	# a mistake with the reset. The commit message will be "WIPE SAVEPOINT" in this case.
+	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+
+
+	################################################################################
+	# View git log
+
+	# git log
+	tree	= log --graph --decorate --abbrev-commit --branches --tags --remotes --date=short --pretty=format:'%C(yellow)%h%Creset-%C(cyan)(%ai%x08%x08%x08%x08%x08%x08) %ar%Creset%C(bold green)%d%Creset %s %Creset %C(cyan)[%cn]%Creset'
+	lg		= log --stat --abbrev-commit --show-signature
+	gpg		= log --show-signature
+
+
+	################################################################################
+	# View Tags
+
+	# Show current tag, if available
+	current = !sh -c 'git name-rev --tags --name-only $(git rev-parse HEAD)'
+
+	# Show tags sorted by date
+	tags = !"git for-each-ref \
+		--sort=creatordate \
+		--format '%(refname)_,,,_%(creatordate:format:%Y-%m-%d %H:%M)_,,,_%(committername)%(taggername)_,,,_%(subject)' refs/tags \
+		| sed 's|^refs/tags/||g' \
+		| awk 'BEGIN { FS = \"_,,,_\"  } ; { \
+			printf \"%-20s %-18s %-25s %s\\n\", $2, $1, $4, $3  \
+		}'"
+
+
+	################################################################################
+	# View files
+
+	# List files (indexed)
+	ls		= ls-tree --name-only -r HEAD
+
+	# List files (ignored)
+	ign		= ls-files -o -i --exclude-standard
+	ls-ign	= ls-files -o -i --exclude-standard
+	ls-ignored	= ls-files -o -i --exclude-standard
+
+	# List files (modified)
+	ls-mod	= ls-files -m
+	ls-modified	= ls-files -m
+
+	# List files (deleted)
+	ls-del	= ls-files -d
+	ls-deleted = ls-files -d
+
+	# List files (unmerged)
+	ls-unm	= ls-files -u
+	ls-unmerged = ls-files -u
+
+
+
+################################################################################
+###
+### Color theme
+###
+################################################################################
+
+[color]
+	ui = true
+
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+
+
+[gpg]
+	program = gpg
