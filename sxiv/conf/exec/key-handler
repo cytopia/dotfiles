@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# input '$file'
+#
+# First Press <Ctrl>+X to trigger this
+# Then Press any of the below defined shortcuts
+
+
+while read file; do
+	case "$1" in
+		# Delete to trash
+		"C-d")
+			mv "$file" ~/.trash
+			;;
+		# Rotate
+		"C-r")
+			convert -rotate 90 "$file" "$file"
+			;;
+		# Copy to clipboard
+		"C-c")
+			 xclip -selection clipboard -target image/png -i "${file}"
+			#echo "$file" | xclip -selection clipboard
+			;;
+		# Set background
+		"C-w")
+			feh --no-fehbg --bg-scale "$file"
+			;;
+	esac
+done
