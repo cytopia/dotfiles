@@ -509,5 +509,8 @@ for_window [class="URxvt" instance="floating_urxvt$"] floating toggle
 #
 ############################################################################################
 
-#exec --no-startup-id sh ~/.config/i3/autostart.sh
-exec_always --no-startup-id sh ~/.config/i3/autostart.sh
+# Wallpaper
+exec_always --no-startup-id feh --no-fehbg --bg-scale ${HOME}/Pictures/wallpaper/active-wallpaper
+
+# Autostart helper: https://github.com/cytopia/autorunner
+exec_always --no-startup-id /usr/local/bin/autorunner

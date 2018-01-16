@@ -40,6 +40,14 @@ fi
 ############################################################
 
 ###
+### autorunner
+###
+if ask "Symlink autorunner?" "${ASK}"; then
+	symlink_file "${MY_PATH}/autorunner" "${HOME}/.config/autorunner" "${MY_BACKUPDIR}"
+fi
+
+
+###
 ### bash
 ###
 if ask "Symlink bash?" "${ASK}"; then
