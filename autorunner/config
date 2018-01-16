@@ -1,0 +1,76 @@
+# Autorunner configuration file
+#
+# Usage: execute "<restart>" "<notify>" "<command>"
+#
+#   <restart>    1: Kill the process and restart it
+#                0: Only start when it is not running
+#
+#   <notify>     1: Notify via notifications when started/restarted
+#                0: Do not notify
+#   <command>    Full command (including arguments) to run
+#
+# Examples:
+#
+#   # Run clipmenu once (never restart it)
+#   execute "0" "0" "clipmenud"
+#
+#   # Run thunar daemon and always restart it when autorunner is called again
+#   # Always trigger notifications whenever it is stopped and restarted
+#   execute "1" "1" "thunar --daemon"
+#
+
+execute "0" "1" "clipmenud"
+
+## Turn on/off annoying system beep
+execute "0" "1" "xset b off"
+
+## Set keyboard settings - 250 ms delay and 25 cps (characters per second) repeat rate.
+## Adjust the values according to your preferances.
+# KEYBOARD_RATE=60
+# KEYBOARD_DELAY=250
+execute "0" "1" "xset r rate 250 40"
+
+## Turn off monitor
+# xset dpms [standby [suspend [off]]]
+# Turn off monitor after 5 minutes
+execute "0" "1" "xset dpms 0 0 300"
+
+# Auto-lock screen
+# xset s sec-notifications sec-lock
+execute "0" "1" "xset s 600 30"
+execute "1" "1" "xss-lock -v -n \"notify-send --urgency=critical --icon=/usr/share/icons/Adwaita/48x48/actions/system-lock-screen.png -- 'Auto-lock in 30 sec.'\" -- /usr/local/bin/xlock"
+
+## Network Manager Applet (TASKBAR-ICON)
+execute "0" "1" "nm-applet"
+
+## Filemanager Daemon (for auto-mounts
+execute "1" "1" "thunar --daemon"
+
+## Wallpaper
+#execute "0" "1" "feh --no-fehbg --bg-scale ${_MY_WALLPAPER}"
+
+## Compositor
+execute "1" "1" "compton"
+
+## Notification daemon
+execute "0" "1" "dunst"
+
+## Bluetooth Manager Applet (TASKBAR-ICON)
+#execute "blueman-applet" "blueman-applet" "blueman-applet"
+
+## Redshift screen
+#execute "redshift-gtk" "redshift-gtk" "redshift"
+
+#execute "xautolock -detectsleep -time 5 -locker '~/.config/i3/bin/i3exit lock' -notify 15 -notifier \"notify-send -u critical -t 10000 -- 'Locking screen in 15 sec'\"" "xautolock" "xautolock"
+
+## Keyring
+#execute "gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh" "gnome-keyring-daemon" "gnome-keyring-daemon"
+
+## Clipboard (TASKBAR-ICON)
+#xfce4-clipman &
+
+## Keyboard Input (TASKBAR-ICON)
+#execute "ibus-daemon --replace --restart --desktop=openbox --xim --daemonize" "ibus-daemon" "ibus-daemon"
+
+#eval "$( dbus-launch --sh-syntax --exit-with-session )"
+
