@@ -127,6 +127,7 @@ fi
 ### gnugp
 ###
 if ask "Symlink gnupg?" "${ASK}"; then
+	symlink_file "${MY_PATH}/gnupg/dirmngr.conf" "${HOME}/.gnupg/dirmngr.conf" "${MY_BACKUPDIR}"
 	symlink_file "${MY_PATH}/gnupg/gpg.conf" "${HOME}/.gnupg/gpg.conf" "${MY_BACKUPDIR}"
 	symlink_file "${MY_PATH}/gnupg/gpg-agent.conf" "${HOME}/.gnupg/gpg-agent.conf" "${MY_BACKUPDIR}"
 fi
