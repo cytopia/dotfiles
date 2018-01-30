@@ -71,19 +71,19 @@ $ ./install.sh -y
 ## Screenshots
 
 #### Rofi
-[![screenshot](screenshot-01.jpg)](screenshot-01.jpg)
+[![screenshot](.github/screenshot-01.jpg)](.github/screenshot-01.jpg)
 
 #### urxvt
-[![screenshot](screenshot-02.jpg)](screenshot-02.jpg)
+[![screenshot](.github/screenshot-02.jpg)](.github/screenshot-02.jpg)
 
 #### Thunar
-[![screenshot](screenshot-03.jpg)](screenshot-03.jpg)
+[![screenshot](.github/screenshot-03.jpg)](.github/screenshot-03.jpg)
 
 #### Neovim
-[![screenshot](screenshot-04.jpg)](screenshot-04.jpg)
+[![screenshot](.github/screenshot-04.jpg)](.github/screenshot-04.jpg)
 
 #### Sublime Text 3
-[![screenshot](screenshot-05.jpg)](screenshot-05.jpg)
+[![screenshot](.github/screenshot-05.jpg)](.github/screenshot-05.jpg)
 
 #### Gimp & LibreOffice
-[![screenshot](screenshot-06.jpg)](screenshot-06.jpg)
+[![screenshot](.github/screenshot-06.jpg)](.github/screenshot-06.jpg)
