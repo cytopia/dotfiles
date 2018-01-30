@@ -51,21 +51,6 @@ repo() {
 	fi
 }
 
-###
-### Go to repo folder
-###
-workspace() {
-	local specific="${1:-}"
-
-	if [ "${specific}" = "" ]; then
-		cd "${HOME}/workspace"
-	else
-		# Go to specific repo
-		# $ repo c
-		# $ repo f
-		cd "${HOME}/workspace/${specific}"*
-	fi
-}
 
 ###
 ### Open notes
@@ -112,7 +97,7 @@ notes() {
 
 	cd "${path}"
 	if [ "${name}" = "private" ]; then
-		${EDITOR:-vim} -o _index.md stash/ablage.md
+		${EDITOR:-vim} -o README.md
 	else
 		${EDITOR:-vim} -o _index.md
 	fi
@@ -121,6 +106,10 @@ notes() {
 	rm -f "${lock}"
 }
 
+
+###
+### Quickly add a shell script
+###
 run() {
 	if [ ! -d "${HOME}/tmp" ]; then
 		mkdir -p "${HOME}/tmp"
@@ -139,12 +128,4 @@ run() {
 	cd "${HOME}/tmp/"
 	vim "run.sh"
 	./run.sh
-}
-
-
-music() {
-	if ! pidof mpd > /dev/null 2>&1; then
-		mpd
-	fi
-	ncmpcpp
 }

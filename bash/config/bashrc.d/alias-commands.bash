@@ -21,8 +21,7 @@ alias su='su -l'
 alias suc='su'
 alias tmux="tmux -2 -u"
 alias ta="tmux -2 -u attach"
-#alias gcalcli='gcalcli --monday --military'
-#alias cal='gcalcli'
+
 #alias vi='env TERM=xterm-256color vim'
 #alias vim='env TERM=xterm-256color vim'
 alias vi='nvim'
@@ -58,9 +57,7 @@ fi
 ###
 ### Geek aliase
 ###
-alias fucking='sudo'
 alias fuck='sudo $(history -p \!\!)' # Redo last command as root
-alias myip="wget -q -O - http://www.ip-lookup.de | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>'"
 alias fake="cat /dev/urandom | hexdump -C | grep 'ca fe'"
 
 
