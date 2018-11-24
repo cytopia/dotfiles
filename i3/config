@@ -82,8 +82,8 @@ new_window pixel 3
 #new_window 1pixel
 
 # i3-gaps specific
-gaps inner 0
-gaps outer 0
+#gaps inner 0
+#gaps outer 0
 
 
 
@@ -98,7 +98,7 @@ gaps outer 0
 # finds out, if available)
 bar {
 	font pango: FontAwesome 9
-	status_command		i3blocks
+	status_command		"exec i3blocks"
 	position			top
 
 	# Only show on main
@@ -422,15 +422,19 @@ mode "$mode_system" {
 ############################################################
 
 # Start a terminal
-bindsym $mod+Return			exec urxvt
-bindsym $mod+Shift+Return	exec --no-startup-id urxvt -name "floating_urxvt"
+bindsym $mod+Return			exec --no-startup-id exec urxvt
+bindsym $mod+Shift+Return	exec --no-startup-id exec urxvt -name "floating_urxvt"
 
 # Run Dialog
-bindsym $mod+d     exec "rofi -show run
-bindsym $mod+space exec "rofi -show combi -combi-modi window,drun,run -modi combi,'calc:qalc +u8 -nocurrencies' -sidebar-mode"
+bindsym $mod+d     exec "exec rofi -show run
+#bindsym $mod+space exec "exec rofi -show combi -combi-modi window,drun,run -modi combi,'calc:qalc +u8 -nocurrencies' -sidebar-mode"
+bindsym $mod+space exec "exec rofi -show combi -combi-modi window,drun,run -modi combi,'calc:rcalc' -sidebar-mode"
 
 # Clipboard Dialog
 bindsym $mod+c exec "CM_LAUNCHER=rofi clipmenu -p 'clipboard:'"
+
+# Pass Dialog
+bindsym $mod+p exec /home/cytopia/bin/pass-dmenu.sh
 
 
 ############################################################
@@ -438,27 +442,27 @@ bindsym $mod+c exec "CM_LAUNCHER=rofi clipmenu -p 'clipboard:'"
 ############################################################
 
 # Sreen Backlight brightness
-bindsym XF86MonBrightnessUp   exec --no-startup-id xf86-backlight -c up
-bindsym XF86MonBrightnessDown exec --no-startup-id xf86-backlight -c down
+bindsym XF86MonBrightnessUp   exec --no-startup-id exec xf86-backlight -c up
+bindsym XF86MonBrightnessDown exec --no-startup-id exec xf86-backlight -c down
 
 # Audio Volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id xf86-audio -c up
-bindsym XF86AudioLowerVolume exec --no-startup-id xf86-audio -c down
-bindsym XF86AudioMute        exec --no-startup-id xf86-audio -c toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id exec xf86-audio -c up
+bindsym XF86AudioLowerVolume exec --no-startup-id exec xf86-audio -c down
+bindsym XF86AudioMute        exec --no-startup-id exec xf86-audio -c toggle
 
 # Audio Control
-bindsym XF86AudioPlay  exec --no-startup-id playerctl play-pause
-bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
-bindsym XF86AudioNext  exec --no-startup-id playerctl next
-bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
+bindsym XF86AudioPlay  exec --no-startup-id exec playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id exec playerctl play-pause
+bindsym XF86AudioNext  exec --no-startup-id exec playerctl next
+bindsym XF86AudioPrev  exec --no-startup-id exec playerctl previous
 
 
 # Screenshot: all (with multi monitors)
-bindsym Print exec --no-startup-id "xscreenshot -c maim -m multi"
+bindsym Print exec --no-startup-id "exec xscreenshot -c maim -m multi"
 # Screenshot: select window or rectangle
-bindsym $mod+Sys_Req exec --no-startup-id "xscreenshot -c maim -m selection"
+bindsym $mod+Sys_Req exec --no-startup-id "exec xscreenshot -c maim -m selection"
 # Screenshot: select window
-bindsym $mod+Shift+Sys_Req exec --no-startup-id "xscreenshot -c maim -m window"
+bindsym $mod+Shift+Sys_Req exec --no-startup-id "exec xscreenshot -c maim -m window"
 
 
 
@@ -476,7 +480,7 @@ bindsym $mod+Shift+Sys_Req exec --no-startup-id "xscreenshot -c maim -m window"
 
 
 # Drop-down Terminal
-exec --no-startup-id urxvt -name scratchurxvt
+exec --no-startup-id exec urxvt -name scratchurxvt
 for_window [instance="scratchurxvt"] move scratchpad
 bindsym $mod+grave [instance="scratchurxvt"] scratchpad show
 

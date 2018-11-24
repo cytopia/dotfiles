@@ -27,10 +27,10 @@ alias ta="tmux -2 -u attach"
 alias vi='nvim'
 alias vim='nvim'
 
-alias  grep=' grep --color=auto --binary-file=without-match --ignore-case'
-alias fgrep='fgrep --color=auto --binary-file=without-match --ignore-case'
-alias egrep='egrep --color=auto --binary-file=without-match --ignore-case'
-alias rgrep='rgrep --color=auto --binary-file=without-match --ignore-case'
+alias  grep=' grep --color=auto --binary-file=without-match'
+alias fgrep='fgrep --color=auto --binary-file=without-match'
+alias egrep='egrep --color=auto --binary-file=without-match'
+alias rgrep='rgrep --color=auto --binary-file=without-match'
 
 
 
@@ -99,26 +99,26 @@ if command -v gls >/dev/null 2>&1; then # Gnu ls (gls via: brew install coreutil
 
 elif [ "$(uname)" == "Linux" ]; then # Gnu ls (Linux)
 
-	alias  l='ls --color=always --group-directories-first --classify -l'
-	alias ll='ls --color=always --group-directories-first --classify -al'
+	alias  l='LC_ALL=C ls --color=always --group-directories-first --classify -l'
+	alias ll='LC_ALL=C ls --color=always --group-directories-first --classify -al'
 	#alias  l='lsl.py --color=always --group-directories-first -l'
 	#alias ll='lsl.py --color=always --group-directories-first -al'
-	alias ls='ls --color=always --group-directories-first --classify'
-	alias la='ls --color=always --group-directories-first --classify -a'
+	alias ls='LC_ALL=C ls --color=always --group-directories-first --classify'
+	alias la='LC_ALL=C ls --color=always --group-directories-first --classify -a'
 
-	alias  l.='ls --color=always --group-directories-first --classify -l -d .*'
-	alias la.='ls --color=always --group-directories-first --classify -d .*'
+	alias  l.='LC_ALL=C ls --color=always --group-directories-first --classify -l -d .*'
+	alias la.='LC_ALL=C ls --color=always --group-directories-first --classify -d .*'
 
 	# sort by time
-	alias  lt='ls --color=always --classify -lt'
-	alias llt='ls --color=always --classify -alt'
-	alias lst='ls --color=always --classify -t'
-	alias lat='ls --color=always --classify -at'
+	alias  lt='LC_ALL=C ls --color=always --classify -lt'
+	alias llt='LC_ALL=C ls --color=always --classify -alt'
+	alias lst='LC_ALL=C ls --color=always --classify -t'
+	alias lat='LC_ALL=C ls --color=always --classify -at'
 
-	alias  lt.='ls --color=always --classify -lt -d .*'
-	alias lat.='ls --color=always --classify -t -d .*'
+	alias  lt.='LC_ALL=C ls --color=always --classify -lt -d .*'
+	alias lat.='LC_ALL=C ls --color=always --classify -t -d .*'
 
-	alias llg='ls --color=always --group-directories-first --classify -al | grep'
+	alias llg='LC_ALL=C ls --color=always --group-directories-first --classify -al | grep'
 
 else # Posix ls (OSX/FreeBSD)
 

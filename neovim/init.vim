@@ -91,6 +91,7 @@ if dein#load_state(expand('~/.local/share/nvim/bundles'))
 	call dein#add('tmux-plugins/vim-tmux', {'on_ft': ['tmux']})
 	call dein#add('PotatoesMaster/i3-vim-syntax', {'on_ft': ['i3']})
 	call dein#add('pearofducks/ansible-vim')
+	call dein#add('hashivim/vim-terraform.git')
 "}}}
 " ------------ Misc {{{
 
@@ -160,6 +161,11 @@ if &term =~ '^screen'
 	execute "set <xDown>=\e[1;*B"
 	execute "set <xRight>=\e[1;*C"
 	execute "set <xLeft>=\e[1;*D"
+endif
+
+" Colum separator
+if exists('+colorcolumn')
+  set colorcolumn=100
 endif
 
 " Enable syntax highlighting
@@ -269,7 +275,7 @@ hi FoldColumn cterm=bold ctermfg=DarkBlue ctermbg=none
 "------- Appearance: Line numbers {{{
 "-------------------------------------------------------------------------------
 set number						" show line numbers
-set relativenumber				" show relative line numbers
+"set relativenumber				" show relative line numbers
 set numberwidth=5				" reserve 5 Spaces for the numbering (left)
 "}}}
 "------- Appearance: Statusbar {{{
