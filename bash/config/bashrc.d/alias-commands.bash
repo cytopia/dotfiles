@@ -27,10 +27,10 @@ alias ta="tmux -2 -u attach"
 alias vi='nvim'
 alias vim='nvim'
 
-alias  grep=' grep --color=auto --binary-file=without-match --ignore-case'
-alias fgrep='fgrep --color=auto --binary-file=without-match --ignore-case'
-alias egrep='egrep --color=auto --binary-file=without-match --ignore-case'
-alias rgrep='rgrep --color=auto --binary-file=without-match --ignore-case'
+alias  grep=' grep --color=auto --binary-file=without-match'
+alias fgrep='fgrep --color=auto --binary-file=without-match'
+alias egrep='egrep --color=auto --binary-file=without-match'
+alias rgrep='rgrep --color=auto --binary-file=without-match'
 
 
 
