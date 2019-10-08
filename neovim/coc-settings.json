@@ -1,0 +1,6 @@
+{
+  "coc.preferences.timeout": 5000,
+  "python.jediEnabled": false,
+  "python.linting.enabled": false,
+  "python.analysis.diagnosticEnabled": false
+}
