@@ -22,6 +22,9 @@ tmux/config/plugins/*
 # Generated bash configs
 bash/config/bashrc.d/git-ident.bash
 
+# Neovim tmp files
+neovim/.netrwhist
+
 
 ######################################
 # GENERIC
