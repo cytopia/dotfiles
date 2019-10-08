@@ -43,9 +43,9 @@ repo() {
 	local specific="${1:-}"
 
 	if [ "${#}" = "1" ]; then
-		cd "${HOME}/repo/"*"${1}"*
+		cd "${HOME}/repo/${1}"*
 	elif [ "${#}" = "2" ]; then
-		cd "${HOME}/repo/"*"${1}"*/*"${2}"*
+		cd "${HOME}/repo/${1}"*/"${2}"*
 	else
 		cd "${HOME}/repo/cytopia"
 	fi
