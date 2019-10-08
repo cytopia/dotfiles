@@ -27,7 +27,7 @@ execute "0" "1" "xset b off"
 # 250 ms delay and 25 cps (characters per second) repeat rate.
 #   KEYBOARD_RATE=60
 #   KEYBOARD_DELAY=250
-execute "0" "1" "xset r rate 250 40"
+execute "0" "1" "xset r rate 250 50"
 
 # Turn off monitor automatically
 # xset dpms [standby [suspend [off]]]
