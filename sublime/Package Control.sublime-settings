@@ -10,6 +10,7 @@
 		"BracketHighlighter",
 		"DocBlockr",
 		"Dockerfile Syntax Highlighting",
+		"EditorConfig",
 		"FileDiffs",
 		"Function Name Display",
 		"GitGutter",
@@ -22,6 +23,7 @@
 		"SingleTrailingNewLine",
 		"SublimeCodeIntel",
 		"SublimeLinter",
+		"SublimeLinter-eslint",
 		"SublimeLinter-json",
 		"SublimeLinter-pep8",
 		"SublimeLinter-php",
@@ -31,7 +33,6 @@
 		"SyncedSideBar",
 		"Theme - Asphalt",
 		"TrailingSpaces",
-		"Xdebug Client",
-		"SublimeLinter-eslint"
+		"Xdebug Client"
 	]
 }
