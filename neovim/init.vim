@@ -62,15 +62,15 @@ if dein#load_state('~/.local/share/nvim/bundles')
 "
 "-------------------------------------------------------------------------------
 " ------------ [Startup Loading] Colorschems {{{
-	call dein#add('tomasr/molokai')     " Default
-	call dein#add('w0ng/vim-hybrid')    " Diff view
+	call dein#add('tomasr/molokai')                  " Default colorscheme
+	call dein#add('w0ng/vim-hybrid')                 " Diff view colorscheme
 "}}}
 " ------------ [Startup Loading] General {{{
-	call dein#add('sgur/vim-editorconfig')      " Respect .editorconfig file
-	call dein#add('itchyny/vim-parenmatch')     " Faster than built-in paren matching
+	call dein#add('sgur/vim-editorconfig')           " Respect .editorconfig file
+	call dein#add('itchyny/vim-parenmatch')          " Faster than built-in paren matching
 "}}}
 " ------------ [Startup Loading] Whitespace {{{
-	call dein#add('ntpeters/vim-better-whitespace')
+	call dein#add('ntpeters/vim-better-whitespace')  " Show trailing whitespace
 "}}}
 " ------------ [Startup Loading] File Explorer {{{
 	call dein#add('scrooloose/nerdtree.git')
@@ -84,7 +84,8 @@ if dein#load_state('~/.local/share/nvim/bundles')
 " ------------ [Lazy Loading: Command] FZF {{{
 	" Ctrl+P / Ctrl+O / Ctrl+G
 	call dein#add('junegunn/fzf', {'build': './install --bin', 'merged': 0})
-	call dein#add('junegunn/fzf.vim', {'on_cmd': ['Ag', 'Buffers', 'Files', 'Lines'],
+	call dein#add('junegunn/fzf.vim', { 'on_cmd': ['Ag', 'Buffers', 'Colors', 'Commands',
+	\ 'Commits', 'BCommits', 'GFiles', 'Files', 'Filetypes', 'Lines', 'BLines'],
 	\ 'depends': 'junegunn/fzf'})
 "}}}
 " ------------ [Lazy Loading: Command/Edit] Git {{{
@@ -106,11 +107,12 @@ if dein#load_state('~/.local/share/nvim/bundles')
 		\ let g:neomake_virtualtext_current_error = 0\n
 		\ let g:neomake_highlight_lines = 1\n
 		\ let g:neomake_python_python_exe = '/usr/bin/python3'\n
-		\ let g:neomake_python_enabled_makers = ['pep8', 'flake8', 'pycodestyle', 'pydocstyle']\n
+		\ let g:neomake_python_enabled_makers = ['flake8', 'pycodestyle', 'pydocstyle']\n
 		\ let g:neomake_yaml_enabled_makers = ['yamllint']\n
 		\ let g:neomake_ansible_enabled_makers = ['yamllint', 'ansiblelint']\n
 		\ let g:neomake_yaml_ansible_enabled_makers = ['yamllint', 'ansiblelint']\n
-		\ let g:neomake_json_enabled_makers = ['jsonlint']
+		\ let g:neomake_json_enabled_makers = ['jsonlint']\n
+		\ autocmd QuitPre * if (&filetype !=# 'qf') | lclose | endif
 	\ "})
 "}}}
 " ------------ [Lazy Loading: FT] Syntax highlighting {{{
@@ -147,6 +149,13 @@ if dein#load_state('~/.local/share/nvim/bundles')
 	\ 'on_ft': ['python'],
 	\ 'hook_source': 'call InitializeCoc()'
 	\ })
+	" Requires Yarn to be installed:
+	" curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+	" echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+	" sudo apt-get update && sudo apt-get install --no-install-recommends yarn
+	call dein#add('neoclide/coc-python', {'build': 'yarn install --frozen-lockfile', 'merged': 0,
+	\ 'depends': 'neoclide/coc.nvim'})
+
 "}}}
 " ------------ [Lazy Loading: Command] DirDiff {{{
 	" Diff complete directories
@@ -182,6 +191,12 @@ set nomodeline
 set report=0                    " Don't report on line changes (TODO:)
 set signcolumn=yes              " Always show signs column
 
+" Performance (in case n?vim becomes slow)
+" set re=1                " Use old regex engine, which is faster at syntax highlighting (:syntime)
+" set norelativenumber    " Ensure it is disabled (very slow feature)
+" set nocursorline        " Ensure it is disabled (very slow feature)
+" set foldmethod=manual   " foldmethod=syntax is a very slow feature
+
 " Drawing
 set lazyredraw                  " Do not redraw screen while executing macros or commands
 if !has('nvim')
@@ -195,64 +210,65 @@ if has('nvim')
 	let g:python3_host_prog = '/usr/bin/python3'
 endif
 "}}}
-"------- Appearance: Colorscheme {{{
+"------- Colorscheme: Theme {{{
 "-------------------------------------------------------------------------------
-set t_Co=256            " Enable 256 color terminal
-let g:rehash256 = 1     " Emulate 256 colors as close as possible if support is lacking
+" Tell nvim to use true color
+if has('nvim')
+	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1"
+endif
+
+" Enables 24-bit RGB color in the TUI
+if exists('+termguicolors')
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	"set termguicolors
+endif
+
+" Molokai emulates 256 colors as close as possible if support is lacking
+let g:rehash256 = 1
 
 " Molokai colorscheme
 let s:molokai_original = 1
 colorscheme molokai
-
-if has('nvim')
-	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-
-" Enables 24-bit RGB color in the TUI
-if has('termguicolors')
-	if exists('$TMUX')
-		set termguicolors
-	endif
-endif
 "}}}
-"------- Appearance: Diff mode {{{
+"------- Colorscheme: Whitespace {{{
 "-------------------------------------------------------------------------------
-
+" Make list characters the same color as the normal background
+hi SpecialKey ctermfg=235 guifg=#262626
+hi NonText    ctermfg=235 guifg=#262626
+"}}}
+"------- Colorscheme: Folding {{{
+"-------------------------------------------------------------------------------
+" fold color
+hi Folded     cterm=bold ctermfg=DarkBlue ctermbg=none guibg=none
+hi FoldColumn cterm=bold ctermfg=DarkBlue ctermbg=none guibg=none
+"}}}
+"------- Colorscheme: Statusbar {{{
+"-------------------------------------------------------------------------------
+hi User1 guifg=#ffdad8  guibg=#880c0e           ctermfg=15 ctermbg=52
+hi User2 guifg=#000000  guibg=#F4905C           ctermfg=16 ctermbg=166
+hi User3 guifg=#292b00  guibg=#f4f597           ctermfg=16 ctermbg=192
+hi User4 guifg=#112605  guibg=#aefe7B           ctermfg=16 ctermbg=84
+hi User5 guifg=#051d00  guibg=#7dcc7d           ctermfg=16 ctermbg=72
+hi User7 guifg=#ffffff  guibg=#880c0e gui=bold  ctermfg=15 ctermbg=52 cterm=bold
+hi User8 guifg=#ffffff  guibg=#5b7fbb           ctermfg=15 ctermbg=25
+hi User9 guifg=#ffffff  guibg=#810085           ctermfg=15 ctermbg=90
+hi User0 guifg=#ffffff  guibg=#094afe           ctermfg=15 ctermbg=16
+"}}}
+"------- Colorscheme: Diff mode {{{
+"-------------------------------------------------------------------------------
 " Colorscheme for calling vimdiff from inside vim
 autocmd FilterWritePre * if &diff | colorscheme hybrid | endif
 
 " If we are in diff mode
 if &diff
-	set diffopt+=iwhite     " Ignore whitespace
-	set diffopt+=vertical   " Vertical windows for diff
-	set diffexpr=DiffW()    " Diff command
 	colorscheme hybrid      " Use different colorscheme
-	set nobackup
-	set nowritebackup
-	set noswapfile
 endif
-function DiffW()
-	let opt = ""
-	if &diffopt =~ "icase"
-		let opt = opt . "-i "
-	endif
-	if &diffopt =~ "iwhite"
-		let opt = opt . "-w " " swapped vim's -b with -w
-	endif
-	silent execute "!diff -a --binary " . opt .
-	\ v:fname_in . " " . v:fname_new .  " > " . v:fname_out
-endfunction
-"}}}
-"------- Appearance: Folding {{{
-"-------------------------------------------------------------------------------
-" fold color
-hi Folded     cterm=bold ctermfg=DarkBlue ctermbg=none
-hi FoldColumn cterm=bold ctermfg=DarkBlue ctermbg=none
 "}}}
 "------- Appearance: Line numbers {{{
 "-------------------------------------------------------------------------------
 set number                      " show line numbers
-"set numberwidth=5              " reserve 5 Spaces for the numbering (left)
 "}}}
 "------- Appearance: Statusbar {{{
 "-------------------------------------------------------------------------------
@@ -260,17 +276,6 @@ set showmode                    " Show INSERT, REPLACE or VISUAL in Statusbar
 set ruler                       " Show line and column number
 set laststatus=2                " Always show status line
 set cmdheight=1
-
-" Define colors
-hi User1 guifg=#ffdad8  guibg=#880c0e           ctermfg=15 ctermbg=52
-hi User2 guifg=#000000  guibg=#F4905C           ctermfg=16 ctermbg=166
-hi User3 guifg=#292b00  guibg=#f4f597           ctermfg=16 ctermbg=192
-hi User4 guifg=#112605  guibg=#aefe7B           ctermfg=16 ctermbg=84
-hi User5 guifg=#051d00  guibg=#7dcc7d           ctermfg=16 ctermbg=72
-hi User7 guifg=#ffffff  guibg=#880c0e gui=bold  ctermfg=15 ctermbg=52 cterm=bold
-hi User8 guifg=#ffffff  guibg=#5b7fbb           ctermfg=15 ctermbg=13
-hi User9 guifg=#ffffff  guibg=#810085           ctermfg=15 ctermbg=90
-hi User0 guifg=#ffffff  guibg=#094afe           ctermfg=15 ctermbg=16
 
 " Helper function
 function! HighlightSearch()
@@ -301,19 +306,8 @@ set list
 " Specify which list characters to show and what symbol to use
 set listchars=tab:→\ ,space:·,eol:↵,trail:·,extends:↷,precedes:↶
 
-" make the highlighting of tabs less annoying
-"highlight SpecialKey ctermbg=235
-"highlight NonText    ctermbg=235
-
-" Make list characters the same color as the normal background
-" so I do not see them.
-" I will however see them, when I highlight text
-hi SpecialKey ctermfg=235 guifg=#262626
-hi NonText    ctermfg=235 guifg=#262626
-
-" show ellipsis at breaking
+" Show ellipsis at line breaking
 set showbreak=…
-"set showbreak=↪
 "}}}
 "------- Appearance: Windows / Panes {{{
 "-------------------------------------------------------------------------------
@@ -333,6 +327,29 @@ if has('clipboard')
 	"set clipboard& clipboard+=unnamedplus
 	set clipboard^=unnamed,unnamedplus
 endif
+"}}}
+"------- Behavior: Diff mode {{{
+"-------------------------------------------------------------------------------
+" If we are in diff mode
+if &diff
+	set diffopt+=iwhite     " Ignore whitespace
+	set diffopt+=vertical   " Vertical windows for diff
+	set diffexpr=DiffW()    " Diff command
+	set nobackup
+	set nowritebackup
+	set noswapfile
+endif
+function DiffW()
+	let opt = ""
+	if &diffopt =~ "icase"
+		let opt = opt . "-i "
+	endif
+	if &diffopt =~ "iwhite"
+		let opt = opt . "-w " " swapped vim's -b with -w
+	endif
+	silent execute "!diff -a --binary " . opt .
+	\ v:fname_in . " " . v:fname_new .  " > " . v:fname_out
+endfunction
 "}}}
 "------- Behavior: Window Split {{{
 "-------------------------------------------------------------------------------
@@ -453,6 +470,7 @@ cnoreabbrev Sexplore Sexplore<CR>
 "-------------------------------------------------------------------------------
 autocmd BufNewFile,BufRead *i3/config setfiletype i3config
 autocmd BufNewFile,BufRead *.cnf setfiletype dosini
+autocmd BufNewFile,BufRead *.xresources setfiletype xdefaults
 "}}}
 "------- Editing: Encoding {{{
 "-------------------------------------------------------------------------------
@@ -522,7 +540,7 @@ map <C-a> ggVG<C-o><C-o>
 nnoremap <C-p> :Files<CR>
 nnoremap <C-o> :Buffers<CR>
 nnoremap <C-g> :Ag<CR>
-nnoremap <C-f> :Lines<CR>
+nnoremap <C-f> :BLines<CR>
 
 " Keybindungs while fzf is active
 let g:fzf_action = {
@@ -587,7 +605,7 @@ let g:fzf_colors = {
 "   e.g. File preview using Highlight
 "   (http://www.andre-simon.de/doku/highlight/en/highlight.html)
 let g:fzf_files_options =
-  \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+	\ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
@@ -659,16 +677,20 @@ let g:signify_sign_changedelete      = g:signify_sign_change
 
 let g:signify_sign_show_count = 1
 
-highlight SignifySignAdd    ctermbg=235 guifg=#00FF00 guibg=#232526
-highlight SignifySignDelete ctermbg=235 guifg=#FF0000 guibg=#232526
-highlight SignifySignChange ctermbg=235 guifg=#F68A2B guibg=#232526
+" Reset to current Theme background color
+highlight SignifySignAdd    ctermbg=235 guibg=#232526
+highlight SignifySignDelete ctermbg=235 guibg=#232526
+highlight SignifySignChange ctermbg=235 guibg=#232526
+
+" Choose color for sings
+highlight SignifySignAdd    ctermfg=46  guifg=#00FF00
+highlight SignifySignDelete ctermfg=160 guifg=#FF0000
+highlight SignifySignChange ctermfg=208 guifg=#F68A2B
 
 nnoremap <leader>gp :SignifyHunkDiff<cr>
 "}}}
 "------- Plugin: Coc {{{
 "-------------------------------------------------------------------------------
-
-" Initialize Coc settings when it is loaded
 function InitializeCoc()
 	set hidden            " If hidden is not set, TextEdit might fail.
 

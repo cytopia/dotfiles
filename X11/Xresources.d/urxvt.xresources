@@ -70,8 +70,6 @@ URxvt*internalBorder:		2
 
 ! Scrollbar
 URxvt*scrollBar:			false
-!URxvt*scrollBar_right:		true
-!URxvt*scrollstyle:			plain
 
 ! Cursor
 URxvt*cursorBlink:			true
