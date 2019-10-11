@@ -111,7 +111,8 @@ if dein#load_state('~/.local/share/nvim/bundles')
 		\ let g:neomake_yaml_enabled_makers = ['yamllint']\n
 		\ let g:neomake_ansible_enabled_makers = ['yamllint', 'ansiblelint']\n
 		\ let g:neomake_yaml_ansible_enabled_makers = ['yamllint', 'ansiblelint']\n
-		\ let g:neomake_json_enabled_makers = ['jsonlint']
+		\ let g:neomake_json_enabled_makers = ['jsonlint']\n
+		\ autocmd QuitPre * if (&filetype !=# 'qf') | lclose | endif
 	\ "})
 "}}}
 " ------------ [Lazy Loading: FT] Syntax highlighting {{{
@@ -148,6 +149,13 @@ if dein#load_state('~/.local/share/nvim/bundles')
 	\ 'on_ft': ['python'],
 	\ 'hook_source': 'call InitializeCoc()'
 	\ })
+	" Requires Yarn to be installed:
+	" curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+	" echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+	" sudo apt-get update && sudo apt-get install --no-install-recommends yarn
+	call dein#add('neoclide/coc-python', {'build': 'yarn install --frozen-lockfile', 'merged': 0,
+	\ 'depends': 'neoclide/coc.nvim'})
+
 "}}}
 " ------------ [Lazy Loading: Command] DirDiff {{{
 	" Diff complete directories
@@ -261,7 +269,6 @@ endif
 "------- Appearance: Line numbers {{{
 "-------------------------------------------------------------------------------
 set number                      " show line numbers
-"set numberwidth=5              " reserve 5 Spaces for the numbering (left)
 "}}}
 "------- Appearance: Statusbar {{{
 "-------------------------------------------------------------------------------
