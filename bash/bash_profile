@@ -143,7 +143,7 @@ export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S: "
 ### Login terminal type
 ###
 export TERM=xterm-256color
-#export TERM=screen-256color
+export COLORTERM=truecolor
 
 
 ###
