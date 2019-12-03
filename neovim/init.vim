@@ -134,6 +134,7 @@ if dein#load_state('~/.local/share/nvim/bundles')
 	call dein#add('ekalinin/Dockerfile.vim', {'on_ft': ['Dockerfile', 'docker-compose']})
 	call dein#add('chr4/nginx.vim', {'on_ft': ['nginx']})
 	call dein#add('raimon49/requirements.txt.vim', {'on_ft': ['requirements']})
+	call dein#add('rhysd/vim-gfm-syntax', {'on_ft': ['markdown']})
 "}}}
 " ------------ [Lazy Loading] Auto Completion {{{
 	" Check if it is working via: checkhealth
@@ -153,8 +154,8 @@ if dein#load_state('~/.local/share/nvim/bundles')
 	" curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 	" echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 	" sudo apt-get update && sudo apt-get install --no-install-recommends yarn
-	call dein#add('neoclide/coc-python', {'build': 'yarn install --frozen-lockfile', 'merged': 0,
-	\ 'depends': 'neoclide/coc.nvim'})
+	" call dein#add('neoclide/coc-python', {'build': 'yarn install --frozen-lockfile', 'merged': 0,
+	" \ 'depends': 'neoclide/coc.nvim'})
 
 "}}}
 " ------------ [Lazy Loading: Command] DirDiff {{{
@@ -181,7 +182,7 @@ set backspace=indent,eol,start  " Allow backspacing over everything in insert mo
 set hidden                      " hide buffers when abandoned instead of unload
 set autoread                    " Automatically reload file contents when changed from outside
 set shell=$SHELL                " Set shell
-set synmaxcol=200               " Only syntax highlight up to 200 colums (performance)
+set synmaxcol=500               " Only syntax highlight up to 200 colums (performance)
 
 "set modeline                    " Interprets such settings: /* vi:ts=4: */
 " https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
@@ -224,12 +225,13 @@ if exists('+termguicolors')
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 	"set termguicolors
 endif
+set t_Co=256
 
 " Molokai emulates 256 colors as close as possible if support is lacking
 let g:rehash256 = 1
 
 " Molokai colorscheme
-let s:molokai_original = 1
+"let s:molokai_original = 1
 colorscheme molokai
 "}}}
 "------- Colorscheme: Whitespace {{{
@@ -466,11 +468,16 @@ cnoreabbrev Sexplo   Sexplore<CR>
 cnoreabbrev Sexplor  Sexplore<CR>
 cnoreabbrev Sexplore Sexplore<CR>
 "}}}
-"------- Behavior: File detection {{{
+"------- Behavior: File specific settings {{{
 "-------------------------------------------------------------------------------
+" File types
 autocmd BufNewFile,BufRead *i3/config setfiletype i3config
 autocmd BufNewFile,BufRead *.cnf setfiletype dosini
 autocmd BufNewFile,BufRead *.xresources setfiletype xdefaults
+
+" Tabs/spaces
+autocmd FileType terraform setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
 "}}}
 "------- Editing: Encoding {{{
 "-------------------------------------------------------------------------------
@@ -537,10 +544,19 @@ map <C-a> ggVG<C-o><C-o>
 "------- Plugin: FZF {{{
 "-------------------------------------------------------------------------------
 " Keybindings
-nnoremap <C-p> :Files<CR>
-nnoremap <C-o> :Buffers<CR>
+"nnoremap <C-p> :Files<CR>
+"nnoremap <silent> <C-p> :call fzf#vim#files('.', {'options': '--prompt "" --inline-info --header= --margin=1,2,1,2'})<CR>
+nnoremap <silent> <C-p> :call fzf#vim#files('', {'options': '--prompt "" --inline-info --header= --margin=1,2,1,2'})<CR>
+nnoremap <silent> <C-o> :call fzf#vim#buffers({'options': '--prompt "" --inline-info --header= --margin=1,2,1,2'})<CR>
+"nnoremap <C-o> :Buffers<CR>
 nnoremap <C-g> :Ag<CR>
 nnoremap <C-f> :BLines<CR>
+
+" What files to find
+"let $FZF_DEFAULT_COMMAND='find * -type f -not \( -path "*/\.git/*" \) -print 2> /dev/null'
+"let $FZF_DEFAULT_COMMAND='find . -not \( -path "*\.git/*" \) \( -type l -o -type f \) 2>/dev/null | sed "s/^\.\///g"'
+let $FZF_DEFAULT_COMMAND='find -L . -not \( -path "*\.git/*" \) -type f 2>/dev/null | sed "s/^\.\///g"'
+"let $FZF_DEFAULT_COMMAND='find . -not \( -path "*\.git/*" \) -type f 2>/dev/null'
 
 " Keybindungs while fzf is active
 let g:fzf_action = {
@@ -551,55 +567,59 @@ let g:fzf_action = {
 " Default fzf layout
 " - down / up / left / right
 " - window (nvim only)
-let g:fzf_layout = {'down': '~30%'}
+"let g:fzf_layout = {'down': '~30%'}
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
 """
 """ Alternative with floating window
 """
-"autocmd! FileType fzf
-"autocmd  FileType fzf set laststatus=0 noshowmode noruler
-"  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-"let $FZF_DEFAULT_OPTS='--layout=reverse'
-"let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-"function! FloatingFZF()
-"  let buf = nvim_create_buf(v:false, v:true)
-"  call setbufvar(buf, '&signcolumn', 'no')
-"
-"  let height = &lines - 8
-"  let width = float2nr(&columns - (&columns * 2 / 10))
-"  let col = float2nr((&columns - width) / 2)
-"
-"  let opts = {
-"        \ 'relative': 'editor',
-"        \ 'row': 4,
-"        \ 'col': col,
-"        \ 'width': width,
-"        \ 'height': height
-"        \ }
-"
-"  "call nvim_open_win(buf, v:true, opts)
-"
-"  let win = nvim_open_win(buf, v:true, opts)
-"  call setwinvar(win, '&number', 0)
-"endfunction
-"highlight NormalFloat cterm=NONE ctermfg=14 ctermbg=0 gui=NONE guifg=#93a1a1 guibg=#00FF00
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+
+  " Have a default size, but also be smaller, if the window is smaller
+  let max_height = 20
+  let max_width  = 120
+  let height     = float2nr(min([&lines - 8, max_height]))
+  let width      = float2nr(min([&columns - (&columns * 2 / 10), max_width]))
+
+  let col = float2nr((&columns - width) / 2)
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': 0,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+
+endfunction
 
 
-" Customize fzf colors to match your color scheme
-let g:fzf_colors = {
-	\ 'fg':      ['fg', 'Normal'],
-	\ 'bg':      ['bg', 'Normal'],
-	\ 'hl':      ['fg', 'Comment'],
-	\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-	\ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-	\ 'hl+':     ['fg', 'Statement'],
-	\ 'info':    ['fg', 'PreProc'],
-	\ 'prompt':  ['fg', 'Conditional'],
-	\ 'pointer': ['fg', 'Exception'],
-	\ 'marker':  ['fg', 'Keyword'],
-	\ 'spinner': ['fg', 'Label'],
-	\ 'header':  ['fg', 'Comment']
-	\ }
+"""
+""" Customize FZF
+"""
+highlight NormalFloat cterm=NONE ctermfg=250 ctermbg=236 gui=NONE guifg=#93a1a1 guibg=#00FF0
+let $FZF_DEFAULT_OPTS='--color=bg:236,bg+:236,fg:250,fg+:1,info:236,pointer:0,prompt:236 --layout=reverse'
+
+
+"let g:fzf_colors = {
+"	\ 'fg':      ['fg', 'Normal'],
+"	\ 'bg':      ['bg', 'Normal'],
+"	\ 'hl':      ['fg', 'Comment'],
+"	\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"	\ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"	\ 'hl+':     ['fg', 'Statement'],
+"	\ 'info':    ['fg', 'PreProc'],
+"	\ 'prompt':  ['fg', 'Conditional'],
+"	\ 'pointer': ['fg', 'Exception'],
+"	\ 'marker':  ['fg', 'Keyword'],
+"	\ 'spinner': ['fg', 'Label'],
+"	\ 'header':  ['fg', 'Comment']
+"	\ }
 
 " [Files] Extra options for fzf
 "   e.g. File preview using Highlight

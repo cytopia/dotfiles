@@ -86,7 +86,7 @@ URxvt*pointerBlank:         true
 
 ! True transparency (requires compositing)
 URxvt*depth:				32
-URxvt*background:			rgba:0000/0000/0000/cccc
+URxvt*background:			rgba:0000/0000/0000/bbbb
 URxvt*foreground:			rgba:dddd/dddd/dddd/bbbb
 
 !Setting to 24 resolves compositing (tearing) in urxvt
