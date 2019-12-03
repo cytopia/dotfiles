@@ -134,6 +134,7 @@ if dein#load_state('~/.local/share/nvim/bundles')
 	call dein#add('ekalinin/Dockerfile.vim', {'on_ft': ['Dockerfile', 'docker-compose']})
 	call dein#add('chr4/nginx.vim', {'on_ft': ['nginx']})
 	call dein#add('raimon49/requirements.txt.vim', {'on_ft': ['requirements']})
+	call dein#add('rhysd/vim-gfm-syntax', {'on_ft': ['markdown']})
 "}}}
 " ------------ [Lazy Loading] Auto Completion {{{
 	" Check if it is working via: checkhealth
@@ -153,8 +154,8 @@ if dein#load_state('~/.local/share/nvim/bundles')
 	" curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 	" echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 	" sudo apt-get update && sudo apt-get install --no-install-recommends yarn
-	call dein#add('neoclide/coc-python', {'build': 'yarn install --frozen-lockfile', 'merged': 0,
-	\ 'depends': 'neoclide/coc.nvim'})
+	" call dein#add('neoclide/coc-python', {'build': 'yarn install --frozen-lockfile', 'merged': 0,
+	" \ 'depends': 'neoclide/coc.nvim'})
 
 "}}}
 " ------------ [Lazy Loading: Command] DirDiff {{{
@@ -181,7 +182,7 @@ set backspace=indent,eol,start  " Allow backspacing over everything in insert mo
 set hidden                      " hide buffers when abandoned instead of unload
 set autoread                    " Automatically reload file contents when changed from outside
 set shell=$SHELL                " Set shell
-set synmaxcol=200               " Only syntax highlight up to 200 colums (performance)
+set synmaxcol=500               " Only syntax highlight up to 200 colums (performance)
 
 "set modeline                    " Interprets such settings: /* vi:ts=4: */
 " https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
@@ -224,12 +225,13 @@ if exists('+termguicolors')
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 	"set termguicolors
 endif
+set t_Co=256
 
 " Molokai emulates 256 colors as close as possible if support is lacking
 let g:rehash256 = 1
 
 " Molokai colorscheme
-let s:molokai_original = 1
+"let s:molokai_original = 1
 colorscheme molokai
 "}}}
 "------- Colorscheme: Whitespace {{{
@@ -466,11 +468,16 @@ cnoreabbrev Sexplo   Sexplore<CR>
 cnoreabbrev Sexplor  Sexplore<CR>
 cnoreabbrev Sexplore Sexplore<CR>
 "}}}
-"------- Behavior: File detection {{{
+"------- Behavior: File specific settings {{{
 "-------------------------------------------------------------------------------
+" File types
 autocmd BufNewFile,BufRead *i3/config setfiletype i3config
 autocmd BufNewFile,BufRead *.cnf setfiletype dosini
 autocmd BufNewFile,BufRead *.xresources setfiletype xdefaults
+
+" Tabs/spaces
+autocmd FileType terraform setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
 "}}}
 "------- Editing: Encoding {{{
 "-------------------------------------------------------------------------------
