@@ -544,31 +544,33 @@ map <C-a> ggVG<C-o><C-o>
 "------- Plugin: FZF {{{
 "-------------------------------------------------------------------------------
 " Keybindings
-"nnoremap <C-p> :Files<CR>
-"nnoremap <silent> <C-p> :call fzf#vim#files('.', {'options': '--prompt "" --inline-info --header= --margin=1,2,1,2'})<CR>
-nnoremap <silent> <C-p> :call fzf#vim#files('', {'options': '--prompt "" --inline-info --header= --margin=1,2,1,2'})<CR>
-nnoremap <silent> <C-o> :call fzf#vim#buffers({'options': '--prompt "" --inline-info --header= --margin=1,2,1,2'})<CR>
-"nnoremap <C-o> :Buffers<CR>
+
+if has('nvim-0.4.0')
+	nnoremap <silent> <C-p> :call fzf#vim#files('', {'options': '--prompt "" --inline-info --header= --margin=1,2,1,2'})<CR>
+	nnoremap <silent> <C-o> :call fzf#vim#buffers({'options': '--prompt "" --inline-info --header= --margin=1,2,1,2'})<CR>
+
+	let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+else
+	nnoremap <C-p> :Files<CR>
+	nnoremap <C-o> :Buffers<CR>
+
+	" Default fzf layout
+	" - down / up / left / right
+	" - window (nvim only)
+	let g:fzf_layout = {'down': '~30%'}
+endif
+
 nnoremap <C-g> :Ag<CR>
 nnoremap <C-f> :BLines<CR>
 
 " What files to find
-"let $FZF_DEFAULT_COMMAND='find * -type f -not \( -path "*/\.git/*" \) -print 2> /dev/null'
-"let $FZF_DEFAULT_COMMAND='find . -not \( -path "*\.git/*" \) \( -type l -o -type f \) 2>/dev/null | sed "s/^\.\///g"'
 let $FZF_DEFAULT_COMMAND='find -L . -not \( -path "*\.git/*" \) -type f 2>/dev/null | sed "s/^\.\///g"'
-"let $FZF_DEFAULT_COMMAND='find . -not \( -path "*\.git/*" \) -type f 2>/dev/null'
-
 " Keybindungs while fzf is active
 let g:fzf_action = {
 	\ 'ctrl-t': 'tab split',
 	\ 'ctrl-x': 'split',
 	\ 'ctrl-v': 'vsplit' }
 
-" Default fzf layout
-" - down / up / left / right
-" - window (nvim only)
-"let g:fzf_layout = {'down': '~30%'}
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
 """
 """ Alternative with floating window
