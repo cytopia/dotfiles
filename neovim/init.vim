@@ -74,7 +74,7 @@ if dein#load_state('~/.local/share/nvim/bundles')
 "}}}
 " ------------ [Startup Loading] File Explorer {{{
 	call dein#add('scrooloose/nerdtree.git')
-	call dein#add('scrooloose/nerdtree-git-plugin.git')
+	call dein#add('Xuyuanp/nerdtree-git-plugin.git')
 "}}}
 " ------------ [Lazy Loading: Command] Tagbar / Function list {{{
 	call dein#add('majutsushi/tagbar', {'on_cmd': ['TagbarToggle', 'TagbarOpen']})
