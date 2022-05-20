@@ -45,8 +45,11 @@ function load_identities {
 function test_identities {
 	# Do we already have identities loaded?
 	local ret
-	ssh-add -l >/dev/null 2>&1
-	ret=$?
+	if ssh-add -l >/dev/null 2>&1; then
+		ret=$?
+	else
+		ret=$?
+	fi
 	# $?=0 means the socket is there and it has a key
 	# $?=1 means the socket is there but contains no key
 	# $?=2 means the socket is not there or broken

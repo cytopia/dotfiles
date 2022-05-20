@@ -179,11 +179,9 @@ if ask "Symlink neovim?" "${ASK}"; then
 	nvim +'call dein#install()' +qall
 
 	# Symlink phpctags
-	if [ ! -f "${BIN_PHPCTAGS}" ]; then
-		echo "Error, phpctags not found in ${BIN_PHPCTAGS}"
-		exit 1
+	if [ -f "${BIN_PHPCTAGS}" ]; then
+		ln -sf "${BIN_PHPCTAGS}" "${HOME}/bin/phpctags"
 	fi
-	ln -sf "${BIN_PHPCTAGS}" "${HOME}/bin/phpctags"
 fi
 
 

@@ -79,7 +79,7 @@ interval=2
 
 [wifi]
 command=~/.local/share/i3blocks-modules/modules/wifi -fe '{status}' '=' 'up' ' {ssid} ({quality}%)' -fe '{status}' '!=' 'up' ' down'
-instance=wlp3s0
+instance=wlp9s0
 interval=2
 
 [iface]
