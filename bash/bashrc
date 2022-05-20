@@ -81,8 +81,6 @@ fi
 #export 1FZF1_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 
 ################################################################################
 ###
