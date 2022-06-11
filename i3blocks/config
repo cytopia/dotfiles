@@ -101,6 +101,12 @@ interval=2
 command=~/.local/share/i3blocks-modules/modules/volume -f "{icon} {volume}%" -id "🔊" -im "🔇" -fe '{port}' '=' 'headphone' '{icon}  {volume}%' -fe '{dev_bus}' '=' 'bluetooth' '{icon}  {volume}%' -tw '{muted}' '=' 'yes'
 interval=1
 
+# Requires internet
+[weather]
+command=~/.local/share/i3blocks-modules/modules/weather
+instance=Berlin
+interval=180
+
 [date]
 command=~/.local/share/i3blocks-modules/modules/date -f " {time}" -t "(%V) %a, %d.%m.%Y" -tg '{time}' '=' '.*(Sat|Sun).*'
 interval=60
