@@ -182,12 +182,12 @@ set backspace=indent,eol,start  " Allow backspacing over everything in insert mo
 set hidden                      " hide buffers when abandoned instead of unload
 set autoread                    " Automatically reload file contents when changed from outside
 set shell=$SHELL                " Set shell
-set synmaxcol=500               " Only syntax highlight up to 200 colums (performance)
+set synmaxcol=1000               " Only syntax highlight up to 200 colums (performance)
 
-"set modeline                    " Interprets such settings: /* vi:ts=4: */
+set modeline                    " Interprets such settings: /* vi:ts=4: */
 " https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
-set modelines=0
-set nomodeline
+"set modelines=0
+"set nomodeline
 
 set report=0                    " Don't report on line changes (TODO:)
 set signcolumn=yes              " Always show signs column
@@ -207,7 +207,7 @@ if !has('nvim')
 endif
 
 if has('nvim')
-	let g:python_host_prog  = '/usr/bin/python'
+	let g:python_host_prog  = '/usr/bin/python2'
 	let g:python3_host_prog = '/usr/bin/python3'
 endif
 "}}}
@@ -334,7 +334,7 @@ endif
 "-------------------------------------------------------------------------------
 " If we are in diff mode
 if &diff
-	set diffopt+=iwhite     " Ignore whitespace
+	"set diffopt+=iwhite     " Ignore whitespace
 	set diffopt+=vertical   " Vertical windows for diff
 	set diffexpr=DiffW()    " Diff command
 	set nobackup

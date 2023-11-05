@@ -97,7 +97,7 @@ new_window pixel 3
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	font pango: FontAwesome 9
+	font pango: FontAwesome 8
 	status_command		"exec i3blocks"
 	position			top
 
@@ -428,7 +428,7 @@ bindsym $mod+Shift+Return	exec --no-startup-id exec urxvt -name "floating_urxvt"
 # Run Dialog
 bindsym $mod+d     exec "exec rofi -show run
 #bindsym $mod+space exec "exec rofi -show combi -combi-modi window,drun,run -modi combi,'calc:qalc +u8 -nocurrencies' -sidebar-mode"
-bindsym $mod+space exec "exec rofi -show combi -combi-modi window,drun,run -modi combi,'calc:rcalc' -sidebar-mode"
+bindsym $mod+space exec "exec rofi -show combi -combi-modi window,drun -modi combi,calc -sidebar-mode -calc-command 'echo -n {result} | xclip'"
 
 # Clipboard Dialog
 bindsym $mod+c exec "CM_LAUNCHER=rofi clipmenu -p 'clipboard:'"
@@ -458,11 +458,11 @@ bindsym XF86AudioPrev  exec --no-startup-id exec playerctl previous
 
 
 # Screenshot: all (with multi monitors)
-bindsym Print exec --no-startup-id "exec xscreenshot -c maim -m multi"
+bindsym Print exec --no-startup-id "exec xscreenshot -p ~/Pictures/Screenshots/ -c maim -m multi"
 # Screenshot: select window or rectangle
-bindsym $mod+Sys_Req exec --no-startup-id "exec xscreenshot -c maim -m selection"
+bindsym $mod+Sys_Req exec --no-startup-id "exec xscreenshot -p ~/Pictures/Screenshots/ -c maim -m selection"
 # Screenshot: select window
-bindsym $mod+Shift+Sys_Req exec --no-startup-id "exec xscreenshot -c maim -m window"
+bindsym $mod+Shift+Sys_Req exec --no-startup-id "exec xscreenshot -p ~/Pictures/Screenshots/ -c maim -m window"
 
 
 

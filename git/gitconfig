@@ -105,12 +105,13 @@
 
 	# What merge tool to use? (see below for merge to config)
 	#tool	= vimdiff
-	tool	= fugitive
+	tool = vimdiff
+	conflictstyle = diff3
 
 
 [mergetool]
 	keepBackup = false
-	prompt = false
+	prompt = true
 
 [mergetool "vimdiff"]
 	# https://www.toofishes.net/media/extra/vim_three_way.png
@@ -118,6 +119,7 @@
 	#cmd = "vim -f -d -c 'wincmd J' -c 'resize 22' $MERGED $LOCAL $BASE $REMOTE"
 	#cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+	#cmd = vimdiff -c "wincmd J" -c "windo set wrap" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 
 [mergetool "fugitive"]
 	cmd = nvim "+Gdiff" $MERGED
