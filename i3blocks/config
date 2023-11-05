@@ -68,8 +68,8 @@ interval=180
 
 # Requires internet
 [btc]
-command=~/.local/share/i3blocks-modules/modules/bitcoin -f ' {usd}$' -tc '{usd}' '<' 4470
-instance=coindesk
+command=~/.local/share/i3blocks-modules/modules/bitcoin -f ' {eur}€' -tc '{eur}' '<' 4470
+instance=bitcoin.de
 interval=180
 
 # Requires internet
@@ -79,7 +79,7 @@ interval=2
 
 [wifi]
 command=~/.local/share/i3blocks-modules/modules/wifi -fe '{status}' '=' 'up' ' {ssid} ({quality}%)' -fe '{status}' '!=' 'up' ' down'
-instance=wlp9s0
+instance=wlp0s20f3
 interval=2
 
 [iface]
@@ -88,7 +88,7 @@ instance=enp0s31f6
 interval=2
 
 [battery]
-command=~/.local/share/i3blocks-modules/modules/battery -fe '{percent}' '<' 90 ' {percent}% ({time})' -fe '{percent}' '<' 75 ' {percent}% ({time})' -fe '{percent}' '<' 60 ' {percent}% ({time})' -fe '{percent}' '<' 35 ' {percent}% ({time})' -fe '{percent}' '<' 5 ' {percent}% ({time})' -fe '{status}' '=' '^charging' '⚡ {percent}% ({time})' -fe '{status}' '=' 'full' ' {percent}%' -tg '{status}' '=' 'full' -tg '{percent}' '=' 100 -ti '{status}' '=' '^charging' -tw '{percent}' '<' 30 -tc '{percent}' '<' 5
+command=~/.local/share/i3blocks-modules/modules/battery -fe '{percent}' '<' 90 ' {percent}% ({time})' -fe '{percent}' '<' 75 ' {percent}% ({time})' -fe '{percent}' '<' 60 ' {percent}% ({time})' -fe '{percent}' '<' 35 ' {percent}% ({time})' -fe '{percent}' '<' 5 ' {percent}% ({time})' -fe '{status}' '=' '^charging' '⚡ {percent}% ({time})' -fe '{status}' '=' 'full' '⚡ {percent}%' -tg '{status}' '=' 'full' -tg '{percent}' '=' 100 -ti '{status}' '=' '^charging' -tw '{percent}' '<' 30 -tc '{percent}' '<' 5
 instance=Battery 0
 interval=2
 

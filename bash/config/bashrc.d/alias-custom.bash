@@ -97,9 +97,9 @@ notes() {
 
 	cd "${path}"
 	if [ "${name}" = "private" ]; then
-		${EDITOR:-vim} -o README.md
+		${EDITOR:-vim} -o TODO.md
 	else
-		${EDITOR:-vim} -o _index.md
+		${EDITOR:-vim} -o TODO.md
 	fi
 
 	# Unlock

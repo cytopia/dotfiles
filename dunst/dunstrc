@@ -1,6 +1,29 @@
 [global]
 	font = Monospace 10
 
+
+	# Shortcuts are specified as [modifier+][modifier+]...key
+	# Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
+	# "mod3" and "mod4" (windows-key).
+	# Xev might be helpful to find names for keys.
+
+	# Close notification.
+	close = ctrl+space
+
+	# Close all notifications.
+	close_all = ctrl+shift+space
+
+	# Redisplay last message(s).
+	# On the US keyboard layout "grave" is normally above TAB and left
+	# of "1".
+	history = ctrl+grave
+
+	# Context menu.
+	context = ctrl+shift+period
+
+
+
+
 	# Allow a small subset of html markup:
 	#   <b>bold</b>
 	#   <i>italic</i>
@@ -156,26 +179,6 @@ hide_duplicates_count = yes
    #:/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/:/usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/48x48/notifications/:/usr/share/icons/Paper/48x48/emblems/
 
 
-[shortcuts]
-
-	# Shortcuts are specified as [modifier+][modifier+]...key
-	# Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
-	# "mod3" and "mod4" (windows-key).
-	# Xev might be helpful to find names for keys.
-
-	# Close notification.
-	close = ctrl+space
-
-	# Close all notifications.
-	close_all = ctrl+shift+space
-
-	# Redisplay last message(s).
-	# On the US keyboard layout "grave" is normally above TAB and left
-	# of "1".
-	history = ctrl+grave
-
-	# Context menu.
-	context = ctrl+shift+period
 
 [frame]
 	width = 4
